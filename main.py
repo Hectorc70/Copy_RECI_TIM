@@ -1,9 +1,8 @@
-from tkinter.filedialog import asksaveasfile, askdirectory, askopenfile
+from tkinter.filedialog import asksaveasfile, askdirectory, askopenfile, askopenfilename
 
 from originales.log_archivos_orig import Log_Archivos_Orig
-from copiado.log.log_nomina import Log_pdf_xml
-from copiado.copiado_archivos.copiado_archivos import copiar_archivos
-
+from copiado.copiado_archivos import copiar_archivos
+from log_y_comprimir.copiado_comprimir import ArchivoCopiado
 
 
 
@@ -18,13 +17,17 @@ def ejecutar_copiado_de_archivos(ruta):
     copiar_archivos(ruta)
 
 
-def crear_log(ruta):
+#crear log por nomina y comprimir
+   
+#def crear_log(ruta):
     
-    log = Log_pdf_xml(ruta)
-    log.escribir_info_log()
+    #log = ArchivoCopiado(ruta)
+    #log.escribir_info_log()
+    #log.comprimir()
 
 
 
-
-crear_log(askdirectory())
+#recuperar_rutas_orig()
+ejecutar_copiado_de_archivos(askopenfile())
+#crear_log(askdirectory())
 

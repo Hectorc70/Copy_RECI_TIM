@@ -5,8 +5,8 @@ from tkinter.filedialog import askopenfile
 
 from shutil import copy
 
-from archivo_excel import Archivo_excel
-from compresion import ArchivoComprimido
+from copiado.modelos.archivo_excel import Archivo_excel
+
 
 
 
@@ -157,29 +157,15 @@ class Archivo(Archivo_excel):
                     print("Archivo Copiado: "  + ruta_destino)
 
 
+          
+
+       
     
         
 
-       
-
-    def comprimir_archivos(self):
-        self.extraer_rutas_originales('Archivos PDF')
-        self.extraer_rutas_destino('Archivos PDF')
-
-        for ruta_carpeta in self.carpetas_nom_archivos:
-            print(ruta_carpeta)
-           
-            comprimido = ArchivoComprimido(ruta_carpeta)
-            comprimido.comprimir()
-        
-        
-
 
         
-       
-archivo = Archivo(askopenfile())
-archivo.comprimir_archivos()
-       
+
 
                
 

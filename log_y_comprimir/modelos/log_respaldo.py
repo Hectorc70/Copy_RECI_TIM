@@ -1,7 +1,7 @@
 
 
-from copiado.log.modelos.log import Log
-from copiado.log.modelos.rutas import Rutas
+from log_y_comprimir.modelos.log import Log
+from log_y_comprimir.modelos.rutas import Rutas
 
 class Log_Destino(Log, Rutas):
     """Crea log por nomina llamando a la clase
