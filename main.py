@@ -19,15 +19,15 @@ def ejecutar_copiado_de_archivos(ruta):
 
 #crear log por nomina y comprimir
    
-#def crear_log(ruta):
+def crear_log(ruta):
     
-    #log = ArchivoCopiado(ruta)
-    #log.escribir_info_log()
-    #log.comprimir()
+    log = ArchivoCopiado(ruta)
+    log.escribir_info_log()
+    log.comprimir()
 
 
 
 #recuperar_rutas_orig()
-ejecutar_copiado_de_archivos(askopenfile())
-#crear_log(askdirectory())
+#ejecutar_copiado_de_archivos(askopenfile())
+crear_log(askdirectory())
 

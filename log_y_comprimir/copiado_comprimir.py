@@ -15,26 +15,32 @@ class Rutas():
         """Recupera las Rutas de Archivos PDF y XML"""
 
         self.ruta             = ruta 
-        self.carpetas_nominas = dict()  
+        self.carpetas_nominas = dict()
+        self.carpeta_base     = dict()  
        
          
 
 
         for ruta, carpetas, documentos in os.walk(self.ruta):                    
             
-
+             
             for archivo in documentos:     
                 print(archivo)            
+                extencion_archivo = os.path.splitext(archivo)
+
+                if extencion_archivo == '.pdf' or extencion_archivo == '.xml':
                 
-                
-                tipo_nomina = ruta.split('\\')[2]
-                periodo     = ruta.split('\\')[1]
-                nom_periodo = periodo + "-" + tipo_nomina
-                ruta_nom    = ruta.split('\\')[0] + "\\" + periodo + "\\" + tipo_nomina         #ruta de carpeta de cada nomina                    
-                self.carpeta_base = ruta.split('\\')[0] + ruta.split('\\')[1]
-                
-                self.carpetas_nominas[nom_periodo] = ruta_nom.replace('/','\\')
-                
+                    tipo_nomina = ruta.split('\\')[2]
+                    periodo     = ruta.split('\\')[1]
+                    nom_periodo = periodo + "-" + tipo_nomina
+                    ruta_nom    = ruta.split('\\')[0] + "\\" + periodo + "\\" + tipo_nomina         #ruta de carpeta de cada nomina                    
+                    
+                    self.carpeta_base["CARPETA_BASE"] = ruta.split('\\')[0] + ruta.split('\\')[1]
+                    
+                    self.carpetas_nominas[nom_periodo] = ruta_nom.replace('/','\\')
+                else:
+                    continue
+
 
         return  self.carpetas_nominas 
                   
@@ -70,7 +76,7 @@ class ArchivoCopiado(Rutas):
             
 
     def comprimir(self):
-        carpeta_zip  = self.carpeta_base + "\\" + "COMPRIMIDOS"
+        carpeta_zip  = self.carpeta_base["CARPETA_BASE"] + "\\" + "COMPRIMIDOS"
         for carpeta in self.carpetas_nominas.values():
             
             print(archivo)
@@ -78,6 +84,7 @@ class ArchivoCopiado(Rutas):
             comprimir.write(archivo, compress_type=zipfile.ZIP_DEFLATED)
  
         comprimir.close()
+        pass
 
 
 
