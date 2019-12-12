@@ -4,9 +4,10 @@ import os.path
 from tkinter.filedialog import askdirectory
 #from tkinter.filedialog import askdirectory
 
-import zipfile
 
-from log_y_comprimir.modelos.log_respaldo import Log_Destino 
+
+from log_y_comprimir.modelos.log_respaldo import Log_Destino
+from log_y_comprimir.modelos.archivo_comprimir import ArchivoComprimido  
 
 
 class Rutas():   
@@ -28,14 +29,14 @@ class Rutas():
                 print(archivo)            
                 extencion_archivo = os.path.splitext(archivo)
 
-                if extencion_archivo == '.pdf' or extencion_archivo == '.xml':
+                if extencion_archivo[-1] == '.pdf' or extencion_archivo[-1] == '.xml':
                 
                     tipo_nomina = ruta.split('\\')[2]
                     periodo     = ruta.split('\\')[1]
                     nom_periodo = periodo + "-" + tipo_nomina
                     ruta_nom    = ruta.split('\\')[0] + "\\" + periodo + "\\" + tipo_nomina         #ruta de carpeta de cada nomina                    
                     
-                    self.carpeta_base["CARPETA_BASE"] = ruta.split('\\')[0] + ruta.split('\\')[1]
+                    
                     
                     self.carpetas_nominas[nom_periodo] = ruta_nom.replace('/','\\')
                 else:
@@ -70,21 +71,26 @@ class ArchivoCopiado(Rutas):
             log.escribir_rutas_pdf()
             log.escribir_rutas_xml()
 
+            a_comprimido = ArchivoComprimido(ruta_nom)
+            
+            print("Archivos Comprimidos")
 
             ruta_guardado = ruta_nom + "\\" + "Log.xlsx" 
             log.guardar(ruta_guardado)
             
 
-    def comprimir(self):
-        carpeta_zip  = self.carpeta_base["CARPETA_BASE"] + "\\" + "COMPRIMIDOS"
-        for carpeta in self.carpetas_nominas.values():
+    #def comprimir(self):
+        
+        #carpeta_zip  = self.carpeta_base["CARPETA_BASE"] + "\\" + "COMPRIMIDOS"
+        
+        
             
-            print(archivo)
-            comprimir = zipfile.ZipFile(carpeta_zip, 'w')
-            comprimir.write(archivo, compress_type=zipfile.ZIP_DEFLATED)
+            
+            
+            
  
-        comprimir.close()
-        pass
+        #comprimir.close()
+    
 
 
 
