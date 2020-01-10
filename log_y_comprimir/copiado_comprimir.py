@@ -30,8 +30,13 @@ class Rutas():
                 extencion_archivo = os.path.splitext(archivo)
 
                 if extencion_archivo[-1] == '.pdf' or extencion_archivo[-1] == '.xml':
-                
-                    tipo_nomina = ruta.split('\\')[2]
+                    
+                    try:
+                        tipo_nomina = ruta.split('\\')[2]
+                    except IndexError:
+                        print(tipo_nomina)
+                        break
+                    
                     periodo     = ruta.split('\\')[1]
                     nom_periodo = periodo + "-" + tipo_nomina
                     ruta_nom    = ruta.split('\\')[0] + "\\" + periodo + "\\" + tipo_nomina         #ruta de carpeta de cada nomina                    

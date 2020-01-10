@@ -93,9 +93,11 @@ class Rutas():
             elif (nomina != 'JUBILADOS_PDF' and nomina != 'ORDENES_JUDICIALES' and
                   periodo in PERIODOS and hoja_control != 'Control'):              
                  
-              
-                subcarpeta  = ruta_pdf.split('\\')[5]
-                
+                try:
+                    subcarpeta  = ruta_pdf.split('\\')[5]
+                except IndexError:
+                    print(ruta_pdf)
+                    break
                 
 
                 if subcarpeta != 'LISTADOS':  

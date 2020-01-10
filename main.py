@@ -27,7 +27,7 @@ def crear_log(ruta):
 
 
 
-#recuperar_rutas_orig()
+recuperar_rutas_orig()
 #ejecutar_copiado_de_archivos(askopenfile())
-crear_log(askdirectory())
+#crear_log(askdirectory())
 
