@@ -60,20 +60,18 @@ class Log:
     
     
     def escribir_en_hoja(self, contenido_lista, col, hoja_activa, fila_ini=1):
-        """Escribe en la hoja que esta activa"""
+        """Escribe en la hoja que esta activa SIEMPRE DEBER SER UNA LISTA"""
 
         self.wb.active =  hoja_activa
 
-        if type(contenido_lista) is list and len(contenido_lista) == 1:
-            for conte in contenido_lista:
-                
-                for texto in conte:
+        if len(contenido_lista) == 1:            
+            for conte in contenido_lista:  
 
-                    fila_ini +=1
-                    texto_celda = self.wb.active.cell(row = fila_ini, column = col)
-                    texto_celda.value = (texto)
+                fila_ini +=1
+                texto_celda = self.wb.active.cell(row = fila_ini, column = col)
+                texto_celda.value = (conte)
 
-        elif type(contenido_lista) is list and  len(contenido_lista) >= 2:
+        elif len(contenido_lista) >= 2:
             self.escribir_varias_columnas(hoja_activa, contenido_lista, col, fila_ini)
 
 
@@ -84,25 +82,14 @@ class Log:
         col = 0
         for conte in listas:
             col +=1
-            fila = 1
-            
-            if type(conte) is list:               
-                for texto in conte:
-                    fila +=1                      
+            fila = 1            
+                          
+            for texto in conte:
+                fila +=1            
 
-                    #print(texto,"|fila|",fila, "|columna|",col)
-
-                    texto_celda = self.wb.active.cell(row = fila, column = col)
-                    texto_celda.value = (texto)        
-                
-                #print("leyendo Otra Lista")
-            else:
-                print("Escritas todas las columnas")
-
-              
-
-                
-
+                texto_celda = self.wb.active.cell(row = fila, column = col)
+                texto_celda.value = (texto)        
+                              
 
 
 

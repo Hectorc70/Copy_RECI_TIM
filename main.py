@@ -3,7 +3,7 @@ from tkinter.filedialog import asksaveasfile, askdirectory, askopenfile, askopen
 from originales.log_archivos_orig import Log_Archivos_Orig
 from copiado.copiado_archivos import copiar_archivos
 from log_y_comprimir.copiado_comprimir import ArchivoCopiado
-
+from ui import  *
 
 
 
@@ -27,7 +27,27 @@ def crear_log(ruta):
 
 
 
-recuperar_rutas_orig()
+#recuperar_rutas_orig()
 #ejecutar_copiado_de_archivos(askopenfile())
 #crear_log(askdirectory())
 
+
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+
+    def __init__(self, *args, **kwargs):
+        QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
+        self.setupUi(self)
+
+        self.ejecutar()
+
+
+    def ejecutar(self):
+        self.pushButton.clicked.connect(recuperar_rutas_orig)
+
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+    window = MainWindow()
+    window.show()
+    app.exec_()
