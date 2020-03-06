@@ -4,8 +4,8 @@ from tkinter.filedialog import askdirectory, asksaveasfile
 
 from openpyxl import Workbook
 
-from modelos.archivos_pdf_xml import ArchivosOrig
-from modelos.log import Log
+from recuperar_rutas.modelos.archivos_pdf_xml import ArchivosOrig
+from recuperar_rutas.modelos.log import Log
 
 
 class Log_Archivos_Orig(Log):
@@ -36,8 +36,8 @@ class Log_Archivos_Orig(Log):
 
         datos = self.separar_datos(self.rutas_pdf[0])
 
-        titulos = ["AÑO-PERIODO", "NOMINA", "ARCHIVO", "RUTA"]
-        lista   = [datos[0], datos[1], datos[2], datos[3]]
+        titulos = ["AÑO-PERIODO", "NOMINA", "ARCHIVO", "RUTA", "RUTA-DESTINO"]
+        lista   = [datos[0], datos[1], datos[2], datos[3], datos[4]]
 
         
 
@@ -63,8 +63,8 @@ class Log_Archivos_Orig(Log):
         self.crear_hoja_nueva("Timbres_XML")
         self.hoja_activa = 2
         datos = self.separar_datos(self.rutas_pdf[1])
-        titulos  = ["AÑO-PERIODO", "NOMINA", "ARCHIVO", "RUTA"]
-        lista   = [datos[0], datos[1], datos[2], datos[3]]
+        titulos  = ["AÑO-PERIODO", "NOMINA", "ARCHIVO", "RUTA", "RUTA-DESTINO"]
+        lista   = [datos[0], datos[1], datos[2], datos[3], datos[4]]
 
         self.escribir_titulo(titulos, fila, hoja_activa)
         self.escribir_en_hoja(lista, columna_inicial, hoja_activa)
@@ -81,24 +81,25 @@ class Log_Archivos_Orig(Log):
 
 
     def separar_datos(self, lista):
-        año    = list()
-        nomina = list()
+        año     = list()
+        nomina  = list()
         archivo = list()
-        ruta   = list()
+        ruta    = list()
+        ruta_sb = list()
 
-        for datos in lista:
-             
+        for datos in lista:           
             
             
             año.append(datos[0][0])
             nomina.append(datos[1][0])                
             archivo.append(datos[2][0])
             ruta.append(datos[3][0])
+            ruta_sb.append(datos[4][0])
             
             
            
 
-        return año, nomina, archivo, ruta
+        return año, nomina, archivo, ruta, ruta_sb
 
 
 
@@ -107,5 +108,5 @@ class Log_Archivos_Orig(Log):
 
 
         
-log = Log_Archivos_Orig(askdirectory())
-log.ejecutar(asksaveasfile())
+#log = Log_Archivos_Orig(askdirectory())
+#log.ejecutar(asksaveasfile())

@@ -52,7 +52,7 @@ class Rutas():
             
         return ruta_completa
 
-    @staticmethod
+    
     def unir_cadenas(self, separador, lista_datos):
 
         cadena = separador.join(lista_datos)
