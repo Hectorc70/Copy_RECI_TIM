@@ -39,7 +39,7 @@ class Archivo(Archivo_excel):
         
 
 
-        COLUMNA = 'A'
+        COLUMNA = 'D'
         fila_i  = 1                                     #Fila que omite en leer
 
         titulos = hoja_lectura[COLUMNA]
@@ -67,51 +67,7 @@ class Archivo(Archivo_excel):
 
 
 
-        hoja_lectura = self.hojas_nombres[hoja]
-
-        self.rutas_archivos_destino = list()
-        self.rutas_destino_carpetas = list()
-
-        self.ruta_madre             = list()
-        self.nomina_destino         = dict()
-        self.carpetas_nom_archivos       = dict()
-        listas_rutas_destino        = list()
-
-
-        columna = 'C'
-        fila_i  = 1                                             #Fila que omite al leer
-
-        titulos = hoja_lectura[columna]
-
-        for titulo in range(fila_i,len(titulos)):            
             
-            listas_rutas_destino.append([titulos[titulo].value])
-
-        
-        for lista_ruta in  listas_rutas_destino:
-
-            for ruta in lista_ruta:
-                ruta_div = ruta.split('\\')
-                disco    = ruta_div[0]
-                carpeta  = ruta_div[1]
-                periodo  = ruta_div[2]
-                nomina   = ruta_div[3]
-                 
-                nomina_per  =  nomina + "-" + periodo  
-                ruta_nomina =  disco + "\\" + carpeta + "\\" + periodo + "\\" + nomina + "\\"
-
-                ruta_div.pop()
-                ruta_carpeta = "\\".join(ruta_div)
-               
-                
-
-                self.rutas_archivos_destino.append(ruta)                
-                self.rutas_destino_carpetas.append(ruta_carpeta)
-
-                self.ruta_madre.append(disco + "\\" + carpeta+"\\")
-                self.nomina_destino[nomina_per] = ruta_nomina
-                
-                self.carpetas_nom_archivos[nomina_per]=[lista_ruta]
         
             
         

@@ -4,8 +4,8 @@ from tkinter.filedialog import askdirectory, asksaveasfile
 
 from openpyxl import Workbook
 
-from modelos.archivos_pdf_xml import ArchivosOrig
-from modelos.log import Log
+from recuperar_rutas.modelos.archivos_pdf_xml import ArchivosOrig
+from recuperar_rutas.modelos.log import Log
 
 
 class Log_Archivos_Orig(Log):
@@ -107,5 +107,5 @@ class Log_Archivos_Orig(Log):
 
 
         
-log = Log_Archivos_Orig(askdirectory())
-log.ejecutar(asksaveasfile())
+#log = Log_Archivos_Orig(askdirectory())
+#log.ejecutar(asksaveasfile())
