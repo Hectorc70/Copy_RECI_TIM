@@ -5,56 +5,20 @@ from copiado.modelos.archivos import Archivo
 
 
 
+class CopiadoArchivos:
 
-class Archivo_pdf(Archivo):
+    def __init__(self, archivo_excel):
 
-    def __init__(self, documento):
-        Archivo.__init__(self, documento)
-        self.hoja = 'Archivos PDF' 
-
-        self.ejecutar_pdf() 
-
-
-        
-
-
-
-    def ejecutar_pdf(self):
-        self.copiar_archivos(self.hoja)
-        print("ARCHIVOS COPIADOS")
-       
-
-
-
-
-
-
-
-class Archivo_xml(Archivo):
+        self.copiado = Archivo(archivo_excel)
     
-    def __init__(self, documento):
-        Archivo.__init__(self, documento)
-        self.hoja = 'Timbres_XML'
+    def ejecutar(self, ruta_destino):
+        hojas = ['Archivos PDF', 'Timbres_XML']
 
-        self.ejecutar_xml()
-    
-         
-    def ejecutar_xml(self):
-        self.copiar_archivos(self.hoja)
-        print("ARCHIVOS COPIADOS")
+        self.copiado.copiar_archivos(hojas[0], ruta_destino)
+        print("RECIBOS COPIADOS")
 
-
-        
-
-
-
-   
-
-        
-def copiar_archivos(doc):    
-
-        Archivo_pdf(doc)
-        Archivo_xml(doc)
+        self.copiado.copiar_archivos(hojas[1], ruta_destino)
+        print("TIMBRES COPIADOS")
 
 
 
