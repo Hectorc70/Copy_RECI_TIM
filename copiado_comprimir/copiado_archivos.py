@@ -1,6 +1,6 @@
 
 
-from copiado.modelos.archivos import Archivo
+from copiado_comprimir.modelos.archivos import Archivo
 
 
 
