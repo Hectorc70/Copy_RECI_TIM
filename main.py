@@ -3,36 +3,23 @@ from tkinter.filedialog import asksaveasfile, askdirectory, askopenfile, askopen
 from PyQt5.QtWidgets import QDialog, QMessageBox
 
 from recuperar_rutas.log_archivos_orig import Log_Archivos_Orig
-from copiado.copiado_archivos import CopiadoArchivos
-#from log_y_comprimir.copiado_comprimir import ArchivoCopiado
+from copiado_comprimir.copiado_archivos import CopiadoArchivos
+from copiado_comprimir.comprimir import ComprimirArchivo
 from ui import  *
 
 
 
 
 
-
-
-#crear log por nomina y comprimir
-   
-#def crear_log(ruta):
-	
-#	log = ArchivoCopiado(ruta)
-#	log.escribir_info_log()
-#	log.comprimir()
-
-
-
-#recuperar_rutas_orig()
-#ejecutar_copiado_de_archivos(askopenfile())
-#crear_log(askdirectory())
-
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 	def __init__(self, *args, **kwargs):
 		QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
+		
 		self.setupUi(self)
+		
 		self.ejecutar()
+
 
 	
 
@@ -45,20 +32,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 	def recuperar_rutas_orig(self, ruta):
 		"""Llama el modulo de recuperar rutas de 
 			recibos y timbres de nominas"""
-
+		self.estado_opciones_iniciales(True)
 		log = Log_Archivos_Orig(ruta)
 		log.ejecutar(asksaveasfile(mode='w', defaultextension=".xlsx"))
+		self.estado_opciones_iniciales(False)
 
-		self.opcion_recuperar_rutas_enabled(False)
+		
 
 	
 	def ejecutar_copiado_de_archivos(self, ruta_destino):
-		
+		self.estado_opciones_iniciales(True)
 		
 		archivos = CopiadoArchivos(askopenfile())
 		archivos.ejecutar(ruta_destino)
-
-		self.opcion_copiar_enabled(False)
+		self.estado_opciones_iniciales(False)
+		
+	
+	def comprimir_archivos(self, ruta):
+		self.estado_opciones_iniciales(True)
+		archivos_comprimidos = ComprimirArchivo(ruta)
+		archivos_comprimidos.ejecutar_compresor()
+		self.estado_opciones_iniciales(False)
 	
 
 	def opciones_ceck(self):
@@ -67,8 +61,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 		ruta = self.ruta_origen.text()
 		ruta_destino = self.ruta_destino.text()
 	
-		if self.recuperar_rutas.isChecked():
-			self.opcion_recuperar_rutas_enabled(True)            
+		if self.recuperar_rutas.isChecked():			     
 
 			if ruta == '':
 				self.mostrar_advertencia("Debe indicar una ruta")
@@ -76,29 +69,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 				self.recuperar_rutas_orig(ruta)
 		
 		if self.copiar.isChecked():
-			self.opcion_copiar_enabled(True)
+			
 			if ruta_destino == '':
 				self.mostrar_advertencia("Indique una ruta C:\\CARPETA")
 			else:
 				self.ejecutar_copiado_de_archivos(ruta_destino)
 
+		if self.comprimir.isChecked():
+			self.ruta_destino.setDisabled(True)
+			if ruta == '':
+				self.mostrar_advertencia("Debe llenar el campo de Carpeta Origen")
+			else:
+				self.comprimir_archivos(ruta)
+
+
+
 		
 		else:
 			self.mostrar_advertencia("Seleccione una opcion")
 	
-	def opcion_recuperar_rutas_enabled(self, valor):
-		"""Opciones habilitadas o desabilitadas segun sea el caso
-		 True o False"""
-
-		self.opciones.setDisabled(valor)
+		
+	def estado_opciones_iniciales(self, valor):
 		self.ruta_destino.setDisabled(valor)
-		
-
-	def opcion_copiar_enabled(self, valor):
-		self.opciones.setDisabled(valor)
 		self.ruta_origen.setDisabled(valor)
+		self.opciones.setDisabled(valor)
 		
-
    
 	def mostrar_advertencia(self, texto):
 		"""Muestra advertencias"""

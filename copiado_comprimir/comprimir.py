@@ -4,9 +4,9 @@ from os import makedirs
 import zipfile
 from tkinter.filedialog import askdirectory, askopenfile
 
-from copiado_archivos import CopiadoArchivos
-from modelos.rutas import Rutas
-from modelos.rutas import unir_cadenas, dividir_cadena
+
+from copiado_comprimir.modelos.rutas import Rutas
+from copiado_comprimir.modelos.rutas import unir_cadenas, dividir_cadena
 
 PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 			'12','13','14','15','16','17','18','19','20','21','22','23','24'
@@ -14,14 +14,13 @@ PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 
 class ComprimirArchivo():
 	
-	def __init__(self, archivo, ruta_destino):
-		#archivos = CopiadoArchivos(archivo)
-		#archivos.ejecutar(ruta_destino)
+	def __init__(self, ruta_destino):
+
 
 		self.carpeta_lectura = ruta_destino
 		self.rutas = Rutas(self.carpeta_lectura)
 
-	def creacion_carpeta(self):
+	def ejecutar_compresor(self):
 
 		        
 		ruta_carpetas =self.rutas.recuperar_carpetas(True)
@@ -101,65 +100,6 @@ class ComprimirArchivo():
 		
 			
 			
-
-				
-			
-			
-		
-
-c = ComprimirArchivo(askopenfile(), askdirectory())
-c.creacion_carpeta()
-
-
-
-
-
-		
-   
-
-  
-class ArchivoCopiadoLog:
-
-	def __init__(self):
-		pass
-
-	def escribir_info_log(self, carpetas_nominas):  
-		"""Escribe un log por cada carpeta(Tipo de Nomina)"""  
-		
-	  
-
-		for ruta_nom in carpetas_nominas.values():
-			print(ruta_nom)
-		  
-			log = Log_Destino(ruta_nom)
-			log.escribir_rutas_pdf()
-			log.escribir_rutas_xml()
-
-			a_comprimido = ArchivoComprimido(ruta_nom)
-			
-			print("Archivos Comprimidos")
-
-			ruta_guardado = ruta_nom + "\\" + "Log.xlsx" 
-			log.guardar(ruta_guardado)
-
-  
-	#def comprimir(self):
-		
-		#carpeta_zip  = self.carpeta_base["CARPETA_BASE"] + "\\" + "COMPRIMIDOS"
-		
-		
-			
-			
-			
-			
- 
-		#comprimir.close()
-	
-
-
-
-
-
 
 
 

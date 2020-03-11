@@ -5,8 +5,8 @@ import os.path as path
 
 from shutil import copy
 
-from modelos.archivo_excel import Archivo_excel
-from modelos.rutas import unir_cadenas
+from copiado_comprimir.modelos.archivo_excel import Archivo_excel
+from copiado_comprimir.modelos.rutas import unir_cadenas
 
 
 

@@ -2,7 +2,7 @@ import os
 from os.path import splitext
 from tkinter.filedialog import askdirectory
 
-from recuperar_rutas.modelos.rutas import Rutas
+from recuperar_rutas.modelos.rutas import Rutas, unir_cadenas
 
 PERIODOS = ['01','02','03','04','05','06','07','08','09','10','11',
 			'12','13','14','15','16','17','18','19','20','21','22','23','24'
@@ -165,7 +165,7 @@ class ArchivosOrig():
 		for elemento_ruta in ruta_base_split:
 			ruta.remove(elemento_ruta)
 
-		ruta_sin_base = self.rutas.unir_cadenas('\\', ruta)	
+		ruta_sin_base = unir_cadenas('\\', ruta)	
 		
 		return ruta_sin_base
 
