@@ -5,8 +5,8 @@ import os.path as path
 
 from shutil import copy
 
-from copiado.modelos.archivo_excel import Archivo_excel
-from copiado.modelos.rutas import unir_cadenas
+from modelos.archivo_excel import Archivo_excel
+from modelos.rutas import unir_cadenas
 
 
 
@@ -112,10 +112,12 @@ class Archivo(Archivo_excel):
                                                              rutas_destino[0],
                                                              rutas_destino[1]):
 
-            if path.exists(ruta_destino):                                   #VALIDA si el archivo existe
-              continue
+            if path.exists(ruta_carpeta):                                   #VALIDA si el archivo existe
+                copy(ruta_original, ruta_destino)
+                print("Archivo Copiado: " + ruta_destino)
+
             
-            else: 
+            else:
                 try:                                                            #Excepcion solo cuando no existe la carpeta la crea
                     copy(ruta_original, ruta_destino)
                     print("Archivo Copiado: " + ruta_destino)
